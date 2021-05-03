@@ -49,7 +49,7 @@ export function addExam(data) {
 
 export function updateExam(data) {
   return request({
-    url: '/exam',
+    url: '/exam/update',
     method: 'put',
     data: data
   })
@@ -64,6 +64,7 @@ export function submitExam(data) {
 }
 
 export function markExam(data) {
+  console.log(data);
   return request({
     url: '/exam/mark',
     method: 'post',

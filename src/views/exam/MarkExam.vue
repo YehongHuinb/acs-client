@@ -19,7 +19,7 @@
             自动评改得分: {{ testData.userGrade.gradeAuto }} 分
           </li>
           <li class="user-info" v-if="testData.userGrade.grade" >最终得分: {{ testData.userGrade.grade }} 分</li>
-          <li class="fr">
+          <li class="fr" v-if="testData.userGrade.markStatus !=1">
             <el-button type="primary" size="mini" @click="submitExam"
               >提交</el-button
             >
@@ -35,7 +35,7 @@
           <li class="test-info">总分: {{ testData.totalScore }} 分</li>
           <li class="test-info">答题人: {{ testData.userGrade.userName }}</li>
           <li class="test-info">最终得分: {{ testData.userGrade.grade }} 分</li>
-          <li class="fr">
+          <li class="fr" v-if="testData.userGrade.markStatus !=1">
             <el-button type="primary" size="mini" @click="submitExam"
               >提交</el-button
             >
@@ -284,11 +284,17 @@ export default {
           userScore: item.userScore,
         });
       });
-      
-      this.testData.userTopics = userTopics;
-      this.testData.userGrade.grade = grade;
-      console.log( this.testData);
-      markExam(this.testData).then((res) => {
+      let request = {
+        examId: this.examId,
+        userTopics: userTopics,
+        userGrade:{
+          grade:grade,
+          userId: this.userId,
+          classesId: this.classesId,
+          examId: this.examId,
+        }
+      }
+      markExam(request).then((res) => {
         this.msgSuccess("批改成功");
       });
     },
@@ -296,6 +302,7 @@ export default {
     //获取试卷数据
     getExamData() {
       getUserExam(this.classesId, this.examId, this.userId).then((res) => {
+        console.log(res.data);
         this.processExamData(res.data);
       });
     },

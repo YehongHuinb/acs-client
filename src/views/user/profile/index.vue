@@ -54,8 +54,6 @@ export default {
   data() {
     return {
       user: {},
-      roleGroup: {},
-      postGroup: {},
       activeTab: "userinfo"
     };
   },

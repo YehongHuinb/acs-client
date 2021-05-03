@@ -1,6 +1,3 @@
-export function aaa() {
-    console.log(111);
-}
 
 export function formatTime(number, format) {
     let time = new Date(number)

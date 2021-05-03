@@ -58,17 +58,6 @@
           </el-col>
           <el-col :span="1.5">
             <el-button
-              type="success"
-              plain
-              icon="el-icon-edit"
-              size="mini"
-              :disabled="single"
-              @click="handleUpdate"
-              >修改</el-button
-            >
-          </el-col>
-          <el-col :span="1.5">
-            <el-button
               type="danger"
               plain
               icon="el-icon-delete"
@@ -99,7 +88,7 @@
             v-if="columns[0].visible"
           />
           <el-table-column
-            label="用户名称"
+            label="用户名"
             align="center"
             key="userName"
             prop="userName"
@@ -120,7 +109,6 @@
             key="sex"
             prop="sex"
             v-if="columns[3].visible"
-            width="120"
           />
           <el-table-column
             label="手机号码"
@@ -128,12 +116,10 @@
             key="phoneNumber"
             prop="phoneNumber"
             v-if="columns[4].visible"
-            width="120"
           />
           <el-table-column
             label="操作"
             align="center"
-            width="160"
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope">
@@ -412,6 +398,7 @@ export default {
       })
         .then(({ value }) => {
           resetUserPassword(row.userId, value).then((response) => {
+            
             this.msgSuccess("修改成功，新密码是：" + value);
           });
         })

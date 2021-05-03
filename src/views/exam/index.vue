@@ -9,7 +9,7 @@
           v-show="showSearch"
           label-width="68px"
         >
-          <el-form-item label="试卷名称" prop="examName">
+          <el-form-item label="作业名称" prop="examName">
             <el-input
               v-model="queryParams.examName"
               placeholder="请输入试卷名称"
@@ -53,7 +53,7 @@
               size="mini"
               @click="handleAdd"
             >
-              创建试卷
+              创建作业
             </el-button>
           </el-col>
           <right-toolbar
@@ -70,14 +70,14 @@
         >
           <el-table-column type="selection" width="50" align="center" />
           <el-table-column
-            label="试卷编号"
+            label="作业编号"
             align="center"
             key="examId"
             prop="examId"
             v-if="columns[0].visible"
           />
           <el-table-column
-            label="试卷名称"
+            label="作业名称"
             align="center"
             key="examName"
             prop="examName"

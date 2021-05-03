@@ -1,0 +1,99 @@
+.classesList{
+    position: relative;
+    padding: 12px 32px 24px 32px;
+
+    .class-list{
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        
+        h4{
+            width: 100%;
+            text-align: center;
+            color: #666;
+        }
+    }
+    .class-box{
+        position: relative;
+        width: 48%;
+        min-width: 600px;
+        height: 230px;
+        background: #fafafa;
+        border-radius: 6px;
+        padding: 0 12px;
+        margin: 24px 1% 0 1%;
+        box-sizing: border-box;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
+
+        .title{
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 12px 0px;
+            font-size: 16px;
+        }
+        .title .classNo{
+            position: relative;
+            top: 1px;
+            margin: 0 24px
+        }
+        .title .className{
+            margin-left: 380px;
+            min-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .title-but{
+            position: absolute;
+            right: 24px;
+            top: 70px;
+            width: 120px;
+            display: flex;
+            justify-content: center;
+            align-content: space-around;
+            flex-wrap: wrap;
+        }
+        .title-but .el-button{
+            width: 120px;
+            margin-bottom: 12px;
+        }
+        .el-button+.el-button{
+            margin-left: 0;
+        }
+        .info{
+            border-top: 1px solid #e4e4e4;
+            padding: 12px 0;
+            color: #666;
+        }
+        .info-row{
+            display: flex;
+            position: relative;
+        }
+        .info-item{
+            padding: 10px 10px;
+            margin-right: 12px;
+            font-size: 14px;
+            p{
+                text-indent:2em;
+                margin-top: 10px;
+            }
+        }
+        .info-item.creator{
+            position: absolute;
+            left: 258px;
+        }
+
+        .class-button{
+            position: absolute;
+            bottom: 0;
+            right: 20px;
+            padding: 10px 10px;
+        }
+    }
+    .el-dialog__body{
+        padding: 30px 50px;
+    }
+    
+}
+

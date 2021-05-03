@@ -294,14 +294,11 @@ export default {
   },
 
   created() {
-    // console.log(this.sortedTopics);
     const examId = this.$route.query.id;
     // 如果试卷id存在,则为编辑试卷
     if (typeof examId != "undefined") {
       this.getExam();
     }
-    // this.testData.creatorId = localStorage.getItem("user_id");
-    // this.userData.id = localStorage.getItem("user_id");
   },
 
   mounted() {
@@ -353,11 +350,10 @@ export default {
       testData.disruptOrder = testData.disruptOrder == true ? "1" : "0";
       testData.permitCopy = testData.permitCopy == true ? "1" : "0";
 
-      // console.log(testData);
 
       if (testData.examId != undefined) {
         updateExam(testData).then(res => {
-          this.msgSuccess("修改成功");
+            this.msgSuccess("修改成功");
         })
       } else {
         addExam(testData).then(res => {

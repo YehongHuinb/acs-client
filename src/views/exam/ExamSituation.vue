@@ -3,9 +3,6 @@
     <!-- 其他班级成员表格 -->
     <div class="user_list table">
       <el-table :data="userGradeList" style="width: 100%">
-        <el-table-column label="用户id">
-          <template slot-scope="scope">{{ scope.row.userId }} </template>
-        </el-table-column>
         <el-table-column prop="userName" label="成员名称"></el-table-column>
         <el-table-column prop="answerDate" label="答题日期" width="184">
         </el-table-column>
@@ -53,8 +50,8 @@
 </template>
 
 <script>
+import { formatSeconds } from '@/utils/common.js'
 import { listUserGrade } from "@/api/userGrade";
-import { formatSeconds } from '@/utils/common'
 
 export default {
   name: "ExamSituation",
@@ -81,7 +78,6 @@ export default {
       this.loading = true;
       listUserGrade(this.queryParams, this.classesId, this.examId).then(
         (response) => {
-          console.log(this.queryParams);
           this.userGradeList = response.rows;
           this.total = response.total;
           this.loading = false;

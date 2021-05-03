@@ -74,14 +74,13 @@
         </div>
       </el-col>
     </el-row>
-
     <el-row :gutter="20" v-if="classesList.length > 0">
       <el-col :span="8" v-for="item in classesList" :key="item.id">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>{{ item.classesName }}</span>
-            <el-dropdown trigger="click">
-              <div>:</div>
+            <el-dropdown trigger="click" style="float:right">
+              <el-button icon="el-icon-caret-bottom" type="text"/>
               <el-dropdown-menu slot="dropdown">
                 <router-link
                   :to="{
@@ -116,10 +115,17 @@
             </el-dropdown>
           </div>
           <div>
-            <el-row>
-              <el-col>创建者:&nbsp;&nbsp;{{item.creatorName}} </el-col>
-              <el-col></el-col>
+            <el-row >
+              <el-col v-if="$hasRole('教师')">班级编号:&nbsp;{{item.classesId}}</el-col>            
+            </el-row>
+            <el-row style="margin-top:3%">
+              <el-col>创建者:&nbsp;{{item.creatorName}} </el-col>
+            </el-row>
+            <el-row style="margin-top:3%">
               <el-col>班级人数:&nbsp;{{item.peopleNum}}</el-col>
+            </el-row>
+            <el-row style="margin-top:3%">
+              <el-col>班级简介:&nbsp;{{item.introduction}}</el-col>
             </el-row>
           </div>
         </el-card>
@@ -223,7 +229,6 @@ export default {
     getClassesList() {
       this.loading = true;
       listClasses(this.queryParams).then((response) => {
-        console.log(response);
         this.classesList = response.rows;
         this.total = response.total;
         this.loading = false;
@@ -257,7 +262,6 @@ export default {
     },
 
     joinClasses() {
-      console.log(this.classesId);
       addClassesUser(this.classesId).then(() => {
         this.msgSuccess("加入班级成功");
         this.getClassesList();
@@ -298,7 +302,7 @@ export default {
     },
 
     handleDelete(classes) {
-      classesId = classes.classesId;
+      const classesId = classes.classesId;
       this.$confirm(
         '是否确认删除班级名称为"' + classes.classesName + '"班级?',
         "警告",
@@ -318,7 +322,7 @@ export default {
     },
 
     handleDeleteUser(classes) {
-      classesId = classes.classesId;
+      const classesId = classes.classesId;
       this.$confirm(
         '是否确认退出班级名称为"' + classes.classesName + '"班级?',
         "警告",

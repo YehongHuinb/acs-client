@@ -23,13 +23,18 @@
           style="width: 100%"
           @selection-change="handleSelectionChange"
         >
-          <el-table-column type="selection" width="55" />
-          <el-table-column label="班级编号" width="120">
+          <el-table-column type="selection" />
+          <el-table-column label="班级编号">
             <template slot-scope="scope">{{ scope.row.classesId }} </template>
           </el-table-column>
           <el-table-column prop="classesName" label="班级名称" />
-          <el-table-column prop="date" label="考试时间" width="350" />
-          <el-table-column prop="status" label="状态" width="150" />
+          <el-table-column
+            prop="date"
+            label="完成时间"
+            align="center"
+            width="350"
+          />
+          <el-table-column prop="status" label="状态" align="center" />
         </el-table>
         <pagination
           v-show="total > 0"
@@ -41,7 +46,7 @@
       </div>
 
       <!-- 选择考试时间 -->
-      <div v-if="releaseSteps == 1" style="margin-left:32% ; margin-top:2%">
+      <div v-if="releaseSteps == 1" style="margin-left: 32%; margin-top: 2%">
         <el-date-picker
           v-model="releaseDate"
           type="datetimerange"
@@ -56,7 +61,7 @@
           :active-value="1"
           inactive-text="不公布答案"
           :inactive-value="0"
-          style="margin-left:15%"
+          style="margin-left: 15%"
         />
         <el-switch
           v-model="examClasses.publishScore"
@@ -64,7 +69,7 @@
           :active-value="1"
           inactive-text="不公布分数"
           :inactive-value="0"
-          style="margin-left:15%"
+          style="margin-left: 15%"
         />
       </div>
 
@@ -84,8 +89,7 @@
 </template>
 
 <script>
-import { releaseExam } from "@/api/releaseExam";
-import { listClasses } from "@/api/classes";
+import { releaseExam, getClassesList } from "@/api/releaseExam";
 import { getFormatDate } from "@/utils/common";
 
 export default {
@@ -129,14 +133,23 @@ export default {
     show(examId, examName) {
       this.examClasses.examId = examId;
       this.title = examName;
+      this.getClassesList(examId);
       this.open = true;
-      this.getClassesList();
     },
 
-    getClassesList() {
-      listClasses(this.queryParams).then((response) => {
+    getClassesList(examId) {
+      getClassesList(this.queryParams, examId).then((response) => {
         this.classesList = response.rows;
         this.total = response.total;
+        response.rows.map((v) => {
+          if (v.startDate == null) {
+            v.status = "未发布";
+            v.date = "--";
+          } else {
+            v.status = "已发布";
+            v.date = v.startDate + " 至 " + v.deadline;
+          }
+        });
       });
     },
 
@@ -146,7 +159,6 @@ export default {
 
     lastStep() {
       this.releaseSteps == 1 ? (this.releaseSteps = 0) : (this.open = false);
-
     },
 
     nestStep() {
@@ -167,20 +179,16 @@ export default {
         return;
       }
 
-      this.doRelease()
+      this.doRelease();
     },
 
     doRelease() {
-      this.examClasses.startDate = getFormatDate(
-        new Date(this.releaseDate[0])
-      );
-      this.examClasses.deadline = getFormatDate(
-        new Date(this.releaseDate[1])
-      );
+      this.examClasses.startDate = getFormatDate(new Date(this.releaseDate[0]));
+      this.examClasses.deadline = getFormatDate(new Date(this.releaseDate[1]));
 
       releaseExam(this.examClasses).then((res) => {
         this.$message.success("发布成功");
-        this.closeReleaseDialog()
+        this.closeReleaseDialog();
       });
     },
 
@@ -197,7 +205,7 @@ export default {
         publishAnswer: 0,
         publishScore: 0,
         ids: [],
-      }
+      };
     },
   },
 };

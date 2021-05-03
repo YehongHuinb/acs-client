@@ -23,3 +23,11 @@ export function cancelRelease(classesId,examId) {
     method: 'delete',
   })
 }
+
+export function getClassesList(query,examId) {
+  return request({
+    url: '/release/classes' + '/' + praseStrEmpty(examId),
+    method: 'get',
+    data:query
+  })
+}

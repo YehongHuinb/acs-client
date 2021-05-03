@@ -5,7 +5,7 @@ export function listClasses(query) {
   return request({
     url: '/classes/list',
     method: 'get',
-    data: query
+    params: query
   })
 }
 
@@ -63,7 +63,7 @@ export function deleteClassesUser(classesId,userId) {
 
 export function quitClasses(classesId) {
   return request({
-    url: '/user/' + praseStrEmpty(classesId),
+    url: 'classes/user/' + praseStrEmpty(classesId),
     method: 'delete',
   })
 }

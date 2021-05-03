@@ -22,18 +22,23 @@
         key="phoneNumber"
         prop="phoneNumber"
       />
+       <el-table-column label="身份">
+          <div slot-scope="scope" v-if="scope.row.userId!=classes.creatorId">学生</div>
+          <div slot-scope="scope" v-else-if="scope.row.userId==classes.creatorId">管理员</div>
+        </el-table-column>
       <el-table-column
         v-if="$hasRole('教师')"
         label="操作"
         align="center"
         class-name="small-padding fixed-width"
       >
-        <template slot-scope="scope">
+        <template slot-scope="scope" >
           <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
             @click="handledelete(scope.row)"
+            v-if="scope.row.userId != classes.creatorId"
           >
             踢出班级
           </el-button>
@@ -53,7 +58,7 @@
 
 <script>
 
-import { listClassesUser, deleteClassesUser } from '@/api/classes'
+import { listClassesUser, deleteClassesUser,getClassesInfo } from '@/api/classes'
 
 export default {
   props: {
@@ -64,6 +69,7 @@ export default {
     return {
 
       loading: true,
+      classes:{},
 
       // 总条数
       total: 0,
@@ -79,6 +85,7 @@ export default {
 
   created() {
     this.getClassesUserList()
+    this.getClassesInfo()
   },
 
   methods: {
@@ -89,6 +96,13 @@ export default {
         this.userList = response.rows;
         this.total = response.total;
         this.loading = false;
+      })
+    },
+
+    getClassesInfo(){
+      const classesId = this.classesId
+      getClassesInfo(classesId).then(res =>{
+        this.classes = res.data;
       })
     },
 
@@ -108,7 +122,7 @@ export default {
           return deleteClassesUser(classesId,userId);
         })
         .then(() => {
-          getClassesUserList()
+          this.getClassesUserList()
           this.msgSuccess("删除成功");
         });
     }
