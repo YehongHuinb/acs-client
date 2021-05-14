@@ -325,6 +325,7 @@ export default {
     //获取试卷数据
     getExamData() {
       getClassesExam(this.classesId, this.examId).then((res) => {
+        console.log(res.data);
         this.processExamData(res.data);
       });
     },
@@ -359,13 +360,16 @@ export default {
         this.finishTest = true;
         this.isRead = true;
         //处理用户答案数据
-        testData.userTopics.forEach((item, index) => {
+        testData.userTopics.forEach((item) => {
           //按换行符分割字符串
           if (item.userAnswer.indexOf("\n") != -1) {
             item.userAnswer = item.userAnswer.split(/[\n]/g);
           }
-
-          testData.topics[index].userAnswer = item.userAnswer;
+          testData.topics.forEach((topic) =>{
+            if(item.topicId==topic.topicId){
+              topic.userAnswer=item.userAnswer
+            }
+          })
         });
         //根据题目id写入用户答案
         /* 判断是否公布答案 */

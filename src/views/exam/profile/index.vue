@@ -184,13 +184,6 @@
               <div v-show="!isEdit(-1,-1)">
                 <el-button icon="el-icon-top" title="上移" @click="moveTopic(-1)"></el-button>
                 <el-button icon="el-icon-bottom" title="下移" @click="moveTopic(1)"></el-button>
-
-                <transition name="el-zoom-in-center">
-                  <div v-show="true" style="display:inline-block;margin:0 10px">
-                    <el-button icon="el-icon-picture-outline" title="上传图片" @click="moveDowmTopic()"></el-button>
-                  </div>
-                </transition>
-
                 <el-button type="danger" icon="el-icon-delete" title="删除" @click="delTopic()"></el-button>
               </div>
             </transition>

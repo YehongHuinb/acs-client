@@ -5,7 +5,7 @@ export function listExam(query) {
   return request({
     url: '/exam/list',
     method: 'get',
-    data: query
+    parms: query
   })
 }
 

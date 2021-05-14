@@ -19,16 +19,6 @@
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
-          <el-form-item label="创建者" prop="creatorName">
-            <el-input
-              v-model="queryParams.creatorName"
-              placeholder="请输入创建者名称"
-              clearable
-              size="small"
-              style="width: 240px"
-              @keyup.enter.native="handleQuery"
-            />
-          </el-form-item>
           <el-form-item>
             <el-button
               type="primary"

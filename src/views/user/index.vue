@@ -9,10 +9,10 @@
           v-show="showSearch"
           label-width="68px"
         >
-          <el-form-item label="用户名称" prop="userName">
+          <el-form-item label="用户名" prop="userName">
             <el-input
               v-model="queryParams.userName"
-              placeholder="请输入用户名称"
+              placeholder="请输入用户名"
               clearable
               size="small"
               style="width: 240px"
@@ -21,7 +21,7 @@
           </el-form-item>
           <el-form-item label="手机号码" prop="telphone">
             <el-input
-              v-model="queryParams.telephone"
+              v-model="queryParams.phoneNumber"
               placeholder="请输入手机号码"
               clearable
               size="small"
@@ -167,10 +167,10 @@
           <el-col :span="12">
             <el-form-item
               v-if="form.userId == undefined"
-              label="用户名称"
+              label="用户名"
               prop="userName"
             >
-              <el-input v-model="form.userName" placeholder="请输入用户名称" />
+              <el-input v-model="form.userName" placeholder="请输入用户名" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -292,7 +292,7 @@ export default {
 
       columns: [
         { key: 0, label: `用户编号`, visible: true },
-        { key: 1, label: `用户名称`, visible: true },
+        { key: 1, label: `用户名`, visible: true },
         { key: 2, label: `用户昵称`, visible: true },
         { key: 3, label: `用户性别`, visible: true },
         { key: 4, label: `手机号码`, visible: true },
@@ -300,7 +300,7 @@ export default {
 
       rules: {
         userName: [
-          { required: true, message: "用户名称不能为空", trigger: "blur" },
+          { required: true, message: "用户名不能为空", trigger: "blur" },
         ],
         nickName: [
           { required: true, message: "用户昵称不能为空", trigger: "blur" },

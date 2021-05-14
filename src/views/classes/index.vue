@@ -145,7 +145,7 @@
         <el-row>
           <el-col :span="24">
             <el-form-item
-              v-if="form.classesId == undefined"
+              v-if="form.classesId != undefined"
               label="班级名称"
               prop="classesName"
             >

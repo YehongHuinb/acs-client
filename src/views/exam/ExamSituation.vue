@@ -3,7 +3,7 @@
     <!-- 其他班级成员表格 -->
     <div class="user_list table">
       <el-table :data="userGradeList" style="width: 100%">
-        <el-table-column prop="userName" label="成员名称"></el-table-column>
+        <el-table-column prop="nickName" label="成员名称"></el-table-column>
         <el-table-column prop="answerDate" label="答题日期" width="184">
         </el-table-column>
         <el-table-column prop="answerTime" label="答题用时">

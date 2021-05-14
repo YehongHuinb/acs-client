@@ -127,7 +127,6 @@ export default {
         uploadAvatar(formData).then(response => {
           this.open = false;
           this.options.img = response.imgUrl;
-          console.log(this.options);
           store.commit('SET_AVATAR', this.options.img);
           this.msgSuccess("修改成功");
           this.visible = false;
