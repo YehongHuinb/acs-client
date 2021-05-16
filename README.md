@@ -9,7 +9,7 @@
 
 ## 快速运行
 
-~~~
+~~~powershell
 npm install
 
 npm run dev
